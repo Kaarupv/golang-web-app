@@ -11,6 +11,8 @@ func main() {
 	http.HandleFunc("/", Home)
 	http.HandleFunc("/about", About)
 
-	fmt.Println(fmt.Sprintf("Starting port on %s", PORT))
+	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("./styles"))))
+
+	fmt.Printf("Starting port on %s", PORT)
 	_ = http.ListenAndServe(PORT, nil)
 }
